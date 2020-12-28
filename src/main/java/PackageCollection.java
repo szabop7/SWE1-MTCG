@@ -2,23 +2,20 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class PackageCollection {
 
-
-
-
     @Setter
     @Getter
-    private ArrayList<Package> packages;
+    private static ArrayList<Package> packageCollection=new ArrayList<>();
 
-
-    public PackageCollection(ArrayList<Package> packages) {
-        this.packages = packages;
+    public PackageCollection(ArrayList<Package> packageCollection) {
+        this.packageCollection = packageCollection;
     }
 
     public static void add(Package p)
     {
-        packages.add(p);
+        packageCollection.add(p);
     }
 }
