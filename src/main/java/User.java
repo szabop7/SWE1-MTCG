@@ -28,14 +28,14 @@ public class User {
 
     @Setter
     @Getter
-    public ArrayList<Deck> decks;
+    public Deck deck;
 
-    public User(String username, String password, boolean admin, ArrayList<Card> stack, ArrayList<Deck> decks) {
+    public User(String username, String password, boolean admin, ArrayList<Card> stack, Deck deck) {
         this.username = username;
         this.password = password;
         this.admin=admin;
         this.stack = stack;
-        this.decks = decks;
+        this.deck = deck;
     }
 
     public boolean create_Package(Card c1, Card c2, Card c3, Card c4, Card c5) throws Exception {
@@ -61,15 +61,15 @@ public class User {
     }
 
     public Package buy() throws Exception {
+        /*
         if(coins>=5)
         {
             coins=coins-5;
-            Card c1=new Monster("Frog","The Destroyer", Element.water,"Selten");
-            Card c2=new Monster("Buffalo","Beast", Element.normal,"Common");
-            Card c3=new Spell("Storm","Hurricane", Element.normal);
-            Card c4=new Spell("Blizzard","The Destroyer", Element.water);
-            Card c5=new Spell("Firerain","Holy Wrath", Element.fire);
-            Card [] cards2=new Card[5];
+            Card c1=new Monster("Frog","The Destroyer", Element.water,"Selten",5);
+            Card c2=new Monster("Buffalo","Beast", Element.normal,"Common",3);
+            Card c3=new Spell("Storm","Hurricane", Element.normal, "rare",5);
+            Card c4=new Spell("Blizzard","The Destroyer", Element.water,"common",3);
+            Card c5=new Spell("Firerain","Holy Wrath", Element.fire, "epic",10);Card [] cards2=new Card[5];
             cards2[0]=c1;
             cards2[1]=c2;
             cards2[2]=c3;
@@ -82,7 +82,7 @@ public class User {
             stack.add(c4);
             stack.add(c5);
             return p;
-        }
+        }*/
         throw new Exception( "Leider nicht genügend Münzen vorhanden");
     }
 

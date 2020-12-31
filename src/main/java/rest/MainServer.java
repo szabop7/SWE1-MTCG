@@ -3,12 +3,19 @@ package rest;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Properties;
 
 public class MainServer {
 
     public static ServerSocket listener = null;
 
     public static void main(String[] args) {
+
+
+
         System.out.println("start server...");
         try {
             listener = new ServerSocket(8000, 5);

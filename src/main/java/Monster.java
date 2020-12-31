@@ -5,16 +5,26 @@ public class Monster extends Card {
 
     @Setter
     @Getter
-    private Element type;
+    private Element element;
 
     @Setter
     @Getter
     private String rarity;
 
+    @Setter
+    @Getter
+    private int damage;
 
-    public Monster(String name, String description, Element type, String rarity) {
+    @Setter
+    @Getter
+    private String monstertype;
+
+
+    public Monster(String name, String description, Element element, String rarity, int damage,String monstertype) {
         super(name, description);
-        this.type=type;
+        this.element=element;
         this.rarity=rarity;
+        this.damage=damage;
+        this.monstertype=monstertype;
     }
 }

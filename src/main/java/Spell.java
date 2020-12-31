@@ -6,10 +6,22 @@ public class Spell extends Card{
 
     @Setter
     @Getter
-    private Element type;
+    private Element element;
 
-    public Spell(String name, String description, Element type) {
+    @Setter
+    @Getter
+    private String rarity;
+
+    @Setter
+    @Getter
+    private int damage;
+
+
+
+    public Spell(String name, String description, Element element,String rarity, int damage) {
         super(name, description);
-        this.type=type;
+        this.element=element;
+        this.rarity=rarity;
+        this.damage=damage;
     }
 }
