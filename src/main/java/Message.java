@@ -1,5 +1,3 @@
-package rest;
-
 import lombok.Getter;
 import lombok.Setter;
 

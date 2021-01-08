@@ -1,4 +1,4 @@
-package rest;
+
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,6 +6,8 @@ import java.io.IOException;
 public class MessageProcesser {
 
     private BufferedReader b_reader;
+
+    public static String auth="";
 
     private Message message = null;
 
@@ -61,6 +63,12 @@ public class MessageProcesser {
         while ( (input = reader.readLine()) != null ) {
             //Weiter Informationen vom Header ausgegeben
             System.out.println(input);
+            String firstPart=input.substring(0,Math.min(input.length(), 13));
+            if(firstPart.equals("Authorization")){
+                String s=input.substring(21,Math.min(input.length(), input.length()));
+                String [] s2=s.split("-");
+                auth=s2[0];
+                System.out.println(auth);}
             if (input.isBlank())
                 break;
             //Informationen werden in einer HashMap gespeichert

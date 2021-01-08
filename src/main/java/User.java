@@ -38,6 +38,8 @@ public class User {
         this.deck = deck;
     }
 
+    public User(){}
+
     public boolean create_Package(Card c1, Card c2, Card c3, Card c4, Card c5) throws Exception {
         if(admin==true)
         {
