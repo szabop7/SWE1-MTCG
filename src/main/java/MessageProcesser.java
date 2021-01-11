@@ -1,5 +1,8 @@
 
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 
@@ -7,6 +10,8 @@ public class MessageProcesser {
 
     private BufferedReader b_reader;
 
+    @Setter
+    @Getter
     public static String auth="";
 
     private Message message = null;
@@ -67,8 +72,8 @@ public class MessageProcesser {
             if(firstPart.equals("Authorization")){
                 String s=input.substring(21,Math.min(input.length(), input.length()));
                 String [] s2=s.split("-");
-                auth=s2[0];
-                System.out.println(auth);}
+                setAuth(s2[0]);
+                System.out.println(getAuth());}
             if (input.isBlank())
                 break;
             //Informationen werden in einer HashMap gespeichert

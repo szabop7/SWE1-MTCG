@@ -1,12 +1,12 @@
 import lombok.Getter;
 import lombok.Setter;
 
-public class Spell extends Card{
+public class Spell {
 
 
     @Setter
     @Getter
-    private Element element;
+    private String element;
 
     @Setter
     @Getter
@@ -16,12 +16,11 @@ public class Spell extends Card{
     @Getter
     private int damage;
 
+    @Setter
+    @Getter
+    private String monstertype;
 
 
-    public Spell(String name, String description, Element element,String rarity, int damage) {
-        super(name, description);
-        this.element=element;
-        this.rarity=rarity;
-        this.damage=damage;
-    }
+
+
 }
