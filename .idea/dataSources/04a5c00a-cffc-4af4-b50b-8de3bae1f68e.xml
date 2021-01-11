@@ -785,13 +785,13 @@ false Z
 false Zulu
 false posixrules
 </TimeZones>
-      <StartupTime>1609204717</StartupTime>
+      <StartupTime>1610152615</StartupTime>
     </root>
     <database id="2" parent="1" name="postgres">
       <ObjectId>13318</ObjectId>
       <Comment>default administrative connection database</Comment>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>492</IntrospectionStateNumber>
+      <IntrospectionStateNumber>947</IntrospectionStateNumber>
       <Current>1</Current>
     </database>
     <role id="3" parent="1" name="pg_execute_server_program">
@@ -843,7 +843,7 @@ false posixrules
       <Comment>standard public schema</Comment>
       <StateNumber>276</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>493</IntrospectionStateNumber>
+      <IntrospectionStateNumber>948</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <access-method id="15" parent="2" name="heap">
@@ -913,49 +913,243 @@ false posixrules
     <language id="24" parent="2" name="internal"/>
     <language id="25" parent="2" name="plpgsql"/>
     <language id="26" parent="2" name="sql"/>
-    <table id="27" parent="14" name="User">
+    <table id="27" parent="14" name="Cards">
+      <ObjectId>16396</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>582</StateNumber>
+    </table>
+    <table id="28" parent="14" name="Deck">
+      <ObjectId>16414</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>500</StateNumber>
+    </table>
+    <table id="29" parent="14" name="Packages">
+      <ObjectId>16406</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>499</StateNumber>
+    </table>
+    <table id="30" parent="14" name="User">
       <ObjectId>16385</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>490</StateNumber>
+      <StateNumber>589</StateNumber>
     </table>
-    <column id="28" parent="27" name="admin">
+    <table id="31" parent="14" name="user_cards">
+      <ObjectId>16422</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>512</StateNumber>
+    </table>
+    <column id="32" parent="27" name="type">
+      <Position>1</Position>
+      <DataType>varchar|0s</DataType>
+      <StateNumber>496</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="33" parent="27" name="rarity">
+      <Position>2</Position>
+      <DataType>varchar|0s</DataType>
+      <StateNumber>496</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="34" parent="27" name="description">
+      <Position>4</Position>
+      <DataType>varchar|0s</DataType>
+      <StateNumber>496</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="35" parent="27" name="damage">
+      <Position>5</Position>
+      <DataType>double precision|0s</DataType>
+      <StateNumber>582</StateNumber>
+      <TypeId>701</TypeId>
+    </column>
+    <column id="36" parent="27" name="monstertype">
+      <Position>6</Position>
+      <DataType>varchar|0s</DataType>
+      <StateNumber>496</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="37" parent="27" name="id">
+      <Position>7</Position>
+      <DataType>varchar|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>559</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="38" parent="27" name="name">
+      <Position>8</Position>
+      <DataType>varchar|0s</DataType>
+      <StateNumber>563</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="39" parent="27" name="Cards_pkey">
+      <ObjectId>16438</ObjectId>
+      <StateNumber>582</StateNumber>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="40" parent="27" name="Cards_pkey">
+      <ObjectId>16439</ObjectId>
+      <StateNumber>563</StateNumber>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>Cards_pkey</UnderlyingIndexName>
+    </key>
+    <column id="41" parent="28" name="username">
+      <Position>1</Position>
+      <DataType>varchar|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>500</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="42" parent="28" name="card_1">
+      <Position>2</Position>
+      <DataType>varchar|0s</DataType>
+      <StateNumber>500</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="43" parent="28" name="card_2">
+      <Position>3</Position>
+      <DataType>varchar|0s</DataType>
+      <StateNumber>500</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="44" parent="28" name="card_3">
+      <Position>4</Position>
+      <DataType>varchar|0s</DataType>
+      <StateNumber>500</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="45" parent="28" name="card_4">
+      <Position>5</Position>
+      <DataType>varchar|0s</DataType>
+      <StateNumber>500</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="46" parent="28" name="Deck_pkey">
+      <ObjectId>16420</ObjectId>
+      <StateNumber>500</StateNumber>
+      <ColNames>username</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="47" parent="28" name="Deck_pkey">
+      <ObjectId>16421</ObjectId>
+      <StateNumber>500</StateNumber>
+      <ColNames>username</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>Deck_pkey</UnderlyingIndexName>
+    </key>
+    <column id="48" parent="29" name="card_1">
+      <Position>2</Position>
+      <DataType>varchar|0s</DataType>
+      <StateNumber>619</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="49" parent="29" name="card_2">
+      <Position>3</Position>
+      <DataType>varchar|0s</DataType>
+      <StateNumber>499</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="50" parent="29" name="card_3">
+      <Position>4</Position>
+      <DataType>varchar|0s</DataType>
+      <StateNumber>499</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="51" parent="29" name="card_4">
+      <Position>5</Position>
+      <DataType>varchar|0s</DataType>
+      <StateNumber>499</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="52" parent="29" name="card_5">
+      <Position>6</Position>
+      <DataType>varchar|0s</DataType>
+      <StateNumber>499</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="53" parent="30" name="admin">
       <Position>1</Position>
       <DataType>boolean|0s</DataType>
       <StateNumber>490</StateNumber>
       <TypeId>16</TypeId>
     </column>
-    <column id="29" parent="27" name="id">
-      <Position>2</Position>
-      <DataType>smallint|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>490</StateNumber>
-      <TypeId>21</TypeId>
-    </column>
-    <column id="30" parent="27" name="password">
+    <column id="54" parent="30" name="password">
       <Position>3</Position>
       <DataType>varchar|0s</DataType>
       <StateNumber>490</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="31" parent="27" name="username">
+    <column id="55" parent="30" name="username">
       <Position>4</Position>
       <DataType>varchar|0s</DataType>
-      <StateNumber>490</StateNumber>
+      <NotNull>1</NotNull>
+      <StateNumber>497</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="32" parent="27" name="User_pkey">
-      <ObjectId>16391</ObjectId>
-      <StateNumber>490</StateNumber>
-      <ColNames>id</ColNames>
+    <column id="56" parent="30" name="coins">
+      <Position>5</Position>
+      <DataType>smallint|0s</DataType>
+      <StateNumber>507</StateNumber>
+      <TypeId>21</TypeId>
+    </column>
+    <column id="57" parent="30" name="active">
+      <Position>6</Position>
+      <DataType>boolean|0s</DataType>
+      <StateNumber>564</StateNumber>
+      <TypeId>16</TypeId>
+    </column>
+    <column id="58" parent="30" name="token">
+      <Position>7</Position>
+      <DataType>varchar|0s</DataType>
+      <StateNumber>589</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="59" parent="30" name="elo">
+      <Position>8</Position>
+      <DataType>bigint|0s</DataType>
+      <StateNumber>589</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <index id="60" parent="30" name="User_pkey">
+      <ObjectId>16404</ObjectId>
+      <StateNumber>498</StateNumber>
+      <ColNames>username</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="33" parent="27" name="User_pkey">
-      <ObjectId>16392</ObjectId>
-      <StateNumber>490</StateNumber>
-      <ColNames>id</ColNames>
+    <key id="61" parent="30" name="User_pkey">
+      <ObjectId>16405</ObjectId>
+      <StateNumber>498</StateNumber>
+      <ColNames>username</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>User_pkey</UnderlyingIndexName>
     </key>
+    <column id="62" parent="31" name="username">
+      <Position>1</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>512</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="63" parent="31" name="cardname">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>512</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <foreign-key id="64" parent="31" name="user_cards_username_fkey">
+      <ObjectId>16428</ObjectId>
+      <StateNumber>512</StateNumber>
+      <ColNames>username</ColNames>
+      <RefTableId>16385</RefTableId>
+      <RefColPositions>4</RefColPositions>
+      <RefTableName>User</RefTableName>
+      <RefKeyName>User_pkey</RefKeyName>
+      <RefColNames>username</RefColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+    </foreign-key>
   </database-model>
 </dataSource>

@@ -1259,6 +1259,7 @@ public class OutputHandler {
                                     e.printStackTrace();
                                 }
                             }
+                            username="";
                         }
                     }
                 }
@@ -1333,6 +1334,88 @@ public class OutputHandler {
                 else{
                     status = "400 Error";
                     messageText="Kein Token angegeben!";
+                }
+            }
+            else if(message.getResource().equals("/score")){
+                String name1="";
+                String name2="";
+                String name3="";
+                int elo1=0;
+                int elo2=0;
+                int elo3=0;
+                String sql = "SELECT username, elo FROM public.\"User\"";
+                Statement stmt = null;
+                try {
+                    stmt = conn.createStatement();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                try {
+                    ResultSet rs = stmt.executeQuery(sql);
+                    ResultSetMetaData rsmd = rs.getMetaData();
+                    int columnsNumber = rsmd.getColumnCount();
+                    int counter=0;
+                    while (rs.next()) {
+                        for(int i=1; i<=columnsNumber;i++){
+                            if(counter==0) {
+                                if (i == 1)
+                                    name1 = rs.getString(i);
+                                else
+                                    elo1 = Integer.parseInt(rs.getString(i));
+                            }
+                            else if(counter==1) {
+                                if (i == 1)
+                                    name2 = rs.getString(i);
+                                else
+                                    elo2 = Integer.parseInt(rs.getString(i));
+                            }
+                            else if(counter==2) {
+                                if (i == 1)
+                                    name3 = rs.getString(i);
+                                else
+                                    elo3 = Integer.parseInt(rs.getString(i));
+                            }
+                        }
+                        counter++;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                if(elo1>=elo2&&elo1>=elo3){
+                    if(elo2>=elo3){
+                        messageText+="1: "+name1+" "+elo1+"\n";
+                        messageText+="2: "+name2+" "+elo2+"\n";
+                        messageText+="3: "+name3+" "+elo3;
+                    }
+                    else{
+                        messageText+="1: "+name1+" "+elo1+"\n";
+                        messageText+="2: "+name3+" "+elo3+"\n";
+                        messageText+="3: "+name2+" "+elo2;
+                    }
+
+                }else if(elo2>=elo1&&elo2>=elo3){
+                    if(elo1>=elo3) {
+                        messageText += "1: " + name2 + " " + elo2 + "\n";
+                        messageText += "2: " + name1 + " " + elo1 + "\n";
+                        messageText += "3: " + name3 + " " + elo3;
+                    }
+                    else{
+                        messageText += "1: " + name2 + " " + elo2 + "\n";
+                        messageText += "2: " + name3 + " " + elo3 + "\n";
+                        messageText += "3: " + name1 + " " + elo1;
+                    }
+                }
+                else if(elo3>=elo1&&elo3>=elo2){
+                    if(elo1>=elo2) {
+                        messageText += "1: " + name3 + " " + elo3 + "\n";
+                        messageText += "2: " + name1 + " " + elo1 + "\n";
+                        messageText += "3: " + name2 + " " + elo2;
+                    }
+                    else{
+                        messageText += "1: " + name3 + " " + elo3 + "\n";
+                        messageText += "2: " + name2 + " " + elo2 + "\n";
+                        messageText += "3: " + name1 + " " + elo1;
+                    }
                 }
             }
 
@@ -2281,10 +2364,156 @@ public class OutputHandler {
             if(fighter1.size()==0){
                 output+=player2+" hat gewonnen!";
                 ende=true;
+                int elo=0;
+                String sql = "SELECT elo FROM public.\"User\"\n"
+                        + "WHERE username='" + player2 + "'";
+                Statement stmt = null;
+                try {
+                    stmt = conn.createStatement();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                try {
+                    ResultSet rs = stmt.executeQuery(sql);
+                    ResultSetMetaData rsmd = rs.getMetaData();
+                    int columnsNumber = rsmd.getColumnCount();
+
+                    while (rs.next()) {
+                        for (int j = 1; j <= columnsNumber; j++) {
+                            elo=Integer.parseInt(rs.getString(j));
+                        }
+
+                        Card c=new Card(name, description, element, monstertype, damage);
+                        fighter1.add(c);
+
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                String sql2 = "UPDATE public.\"User\"\n"
+                        + "SET elo="+(elo+5)+"\n"
+                        + "WHERE username='"+player2+"'";
+                PreparedStatement pstmt2 = null;
+                try {
+                    pstmt2 = conn.prepareStatement(sql2);
+                    pstmt2.executeUpdate();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+
+                elo=0;
+                sql = "SELECT elo FROM public.\"User\"\n"
+                        + "WHERE username='" + player1 + "'";
+                stmt = null;
+                try {
+                    stmt = conn.createStatement();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                try {
+                    ResultSet rs = stmt.executeQuery(sql);
+                    ResultSetMetaData rsmd = rs.getMetaData();
+                    int columnsNumber = rsmd.getColumnCount();
+
+                    while (rs.next()) {
+                        for (int j = 1; j <= columnsNumber; j++) {
+                            elo=Integer.parseInt(rs.getString(j));
+                        }
+
+                        Card c=new Card(name, description, element, monstertype, damage);
+                        fighter1.add(c);
+
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                sql2 = "UPDATE public.\"User\"\n"
+                        + "SET elo="+(elo-10)+"\n"
+                        + "WHERE username='"+player1+"'";
+                pstmt2 = null;
+                try {
+                    pstmt2 = conn.prepareStatement(sql2);
+                    pstmt2.executeUpdate();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
             }
             else if(fighter2.size()==0){
                 output+=player1+" hat gewonnen!";
                 ende=true;
+                int elo=0;
+                String sql = "SELECT elo FROM public.\"User\"\n"
+                        + "WHERE username='" + player1 + "'";
+                Statement stmt = null;
+                try {
+                    stmt = conn.createStatement();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                try {
+                    ResultSet rs = stmt.executeQuery(sql);
+                    ResultSetMetaData rsmd = rs.getMetaData();
+                    int columnsNumber = rsmd.getColumnCount();
+
+                    while (rs.next()) {
+                        for (int j = 1; j <= columnsNumber; j++) {
+                            elo=Integer.parseInt(rs.getString(j));
+                        }
+
+                        Card c=new Card(name, description, element, monstertype, damage);
+                        fighter1.add(c);
+
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                String sql2 = "UPDATE public.\"User\"\n"
+                        + "SET elo="+(elo+5)+"\n"
+                        + "WHERE username='"+player1+"'";
+                PreparedStatement pstmt2 = null;
+                try {
+                    pstmt2 = conn.prepareStatement(sql2);
+                    pstmt2.executeUpdate();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+
+                elo=0;
+                sql = "SELECT elo FROM public.\"User\"\n"
+                        + "WHERE username='" + player2 + "'";
+                stmt = null;
+                try {
+                    stmt = conn.createStatement();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                try {
+                    ResultSet rs = stmt.executeQuery(sql);
+                    ResultSetMetaData rsmd = rs.getMetaData();
+                    int columnsNumber = rsmd.getColumnCount();
+
+                    while (rs.next()) {
+                        for (int j = 1; j <= columnsNumber; j++) {
+                            elo=Integer.parseInt(rs.getString(j));
+                        }
+
+                        Card c=new Card(name, description, element, monstertype, damage);
+                        fighter1.add(c);
+
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                sql2 = "UPDATE public.\"User\"\n"
+                        + "SET elo="+(elo-10)+"\n"
+                        + "WHERE username='"+player2+"'";
+                pstmt2 = null;
+                try {
+                    pstmt2 = conn.prepareStatement(sql2);
+                    pstmt2.executeUpdate();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
             }
             else if(counter==100)
                 ende=true;
